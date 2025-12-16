@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS-only Counter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    button {
+      font-size: 18px;
+      margin: 5px;
+      padding: 10px 20px;
+    }
+    #count {
+      font-size: 40px;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Counter</h1>
+  <div id="count">0</div>
+  <div id="buttons"></div>
+
+  <script>
+    let count = 0;
+
+    // Create buttons dynamically
+    const buttonsContainer = document.getElementById('buttons');
+    const buttons = [
+      { text: '-', action: () => updateCount(-1) },
+      { text: 'Reset', action: () => updateCount(0, true) },
+      { text: '+', action: () => updateCount(1) }
+    ];
+
+    buttons.forEach(btnInfo => {
+      const btn = document.createElement('button');
+      btn.textContent = btnInfo.text;
+      btn.addEventListener('click', btnInfo.action);
+      buttonsContainer.appendChild(btn);
+    });
+
+    const countDisplay = document.getElementById('count');
+
+    function updateCount(change, reset = false) {
+      if (reset) {
+        count = 0;
+      } else {
+        count += change;
+      }
+      countDisplay.textContent = count;
+    }
+  </script>
+
+</body>
+</html>
